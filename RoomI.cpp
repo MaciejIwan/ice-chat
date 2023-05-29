@@ -4,7 +4,6 @@
 
 RoomI::RoomI(const std::string& name) : name(name) {}
 
-
 void RoomI::join(const UserPrx& user, const Ice::Current& current) {
     if (findUser(user)) {
         throw UserExists();

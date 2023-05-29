@@ -2,14 +2,14 @@
 #define USER_I_H
 
 #include <Ice/Ice.h>
+
 #include "Chat.h"
 
 using namespace std;
 using namespace Chat;
 
-class UserI : public User
-{
-public:
+class UserI : public User {
+   public:
     UserI(const string& name);
 
     virtual void sendMessage(const RoomPrx& room, const UserPrx& user, const string& message, const Ice::Current& current);
@@ -18,7 +18,7 @@ public:
     virtual string getName(const Ice::Current& current);
     virtual UserStatus getStatus(const Ice::Current& current);
 
-private:
+   private:
     string name;
     UserStatus status;
 };

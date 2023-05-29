@@ -2,15 +2,15 @@
 #define LOBBY_I_H
 
 #include <Ice/Ice.h>
+
 #include "Chat.h"
 #include "RoomFactoryI.h"
 
 using namespace std;
 using namespace Chat;
 
-class LobbyI : public Lobby
-{
-public:
+class LobbyI : public Lobby {
+   public:
     virtual void _cpp_register(const UserPrx& user, const std::string& password, const Ice::Current& current);
     virtual void login(const UserPrx& user, const std::string& password, const Ice::Current& current);
     virtual void logout(const UserPrx& user, const Ice::Current& current);
@@ -20,7 +20,8 @@ public:
     virtual Users ListUsers(const Ice::Current& current);
     virtual void RegisterRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current);
     virtual void UnregisterRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current);
-private:
+
+   private:
     Rooms rooms;
     Users registeredUsers;
     Users loggedUsers;

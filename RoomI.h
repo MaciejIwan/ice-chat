@@ -2,14 +2,14 @@
 #define ROOM_I_H
 
 #include <Ice/Ice.h>
+
 #include "Chat.h"
 
 using namespace std;
 using namespace Chat;
 
-class RoomI : public Room
-{
-public:
+class RoomI : public Room {
+   public:
     RoomI(const std::string& name, const UserPrx& owner);
     RoomI(const std::string& name);
 
@@ -19,7 +19,7 @@ public:
     virtual Users ListUsers(const Ice::Current& current);
     virtual std::string getName(const Ice::Current& current);
 
-private:
+   private:
     bool findUser(const UserPrx& user);
     std::vector<UserPrx>::iterator findUserIterator(const UserPrx& user);
 
