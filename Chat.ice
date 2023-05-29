@@ -21,7 +21,7 @@ interface Lobby
 {
    void register(User* user, string password) throws UserExists;
    void login(User* user, string password) throws AccessDenied;
-   void logout() throws AccessDenied;
+   void logout(User* user) throws AccessDenied;
    Rooms getRooms() throws AccessDenied;
    Room* createRoom(string name) throws AccessDenied, RoomExists;
    Room* findRoom(string name) throws AccessDenied;
@@ -35,6 +35,7 @@ interface User
 {
    void sendMessage(Room* room, User* user, string message);
    void sendPrivateMessage(User* user, string message);
+   void receiveMessage(string message);
    string getName();
    UserStatus getStatus();
 }
@@ -45,6 +46,7 @@ interface Room
   void join(User* user);
   void sendMessage(User* user, string message);
   void leave(User* user);
+  string getName();
   Users ListUsers();
 }
 

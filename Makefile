@@ -9,7 +9,7 @@ OBJS = $(SLICE_CPP_FILES:.cpp=.o) main.o LobbyI.o RoomFactoryI.o RoomI.o UserI.o
 
 .PHONY: all clean
 
-all: chat
+all: clean chat
 
 chat: $(OBJS)
 	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
@@ -20,7 +20,7 @@ $(SLICE_CPP_FILES): $(SLICE_FILES)
 	slice2cpp $<
 
 clean:
-	rm -f chat $(OBJS) $(SLICE_CPP_FILES)
+	rm -f chat $(OBJS) $(SLICE_CPP_FILES) $(SLICE_CPP_FILES:.cpp=.h)
 
 %.o: %.cpp
 	$(CXX) $(CPPFLAGS) -c $<
