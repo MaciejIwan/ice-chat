@@ -1,12 +1,12 @@
 #include "LobbyI.h"
 
-void LobbyI::registerUser(const UserPrx& user, const std::string& password, const Ice::Current& current)
+void LobbyI::_cpp_register(const UserPrx& user, const std::string& password, const Ice::Current& current)
 {
     // Handle user registration logic here
     // ...
 }
 
-void LobbyI::loginUser(const UserPrx& user, const std::string& password, const Ice::Current& current)
+void LobbyI::login(const UserPrx& user, const std::string& password, const Ice::Current& current)
 {
     // Handle user login logic here
     // ...
@@ -40,7 +40,7 @@ RoomPrx LobbyI::findRoom(const std::string& name, const Ice::Current& current)
     return RoomPrx();
 }
 
-Users LobbyI::listUsers(const Ice::Current& current)
+Users LobbyI::ListUsers(const Ice::Current& current)
 {
     auto userList = Users();
     // Populate the userList with available users
@@ -48,13 +48,13 @@ Users LobbyI::listUsers(const Ice::Current& current)
     return userList;
 }
 
-void LobbyI::registerRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current)
+void LobbyI::RegisterRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current)
 {
     // Register the provided room factory
     // ...
 }
 
-void LobbyI::unregisterRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current)
+void LobbyI::UnregisterRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current)
 {
     // Unregister the provided room factory
     // ...

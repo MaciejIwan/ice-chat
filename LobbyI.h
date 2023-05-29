@@ -10,15 +10,15 @@ using namespace Chat;
 class LobbyI : public Lobby
 {
 public:
-    virtual void registerUser(const UserPrx& user, const std::string& password, const Ice::Current& current);
-    virtual void loginUser(const UserPrx& user, const std::string& password, const Ice::Current& current);
+    virtual void _cpp_register(const UserPrx& user, const std::string& password, const Ice::Current& current);
+    virtual void login(const UserPrx& user, const std::string& password, const Ice::Current& current);
     virtual void logout(const Ice::Current& current);
     virtual Rooms getRooms(const Ice::Current& current);
     virtual RoomPrx createRoom(const std::string& name, const Ice::Current& current);
     virtual RoomPrx findRoom(const std::string& name, const Ice::Current& current);
-    virtual Users listUsers(const Ice::Current& current);
-    virtual void registerRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current);
-    virtual void unregisterRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current);
+    virtual Users ListUsers(const Ice::Current& current);
+    virtual void RegisterRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current);
+    virtual void UnregisterRoomFactory(const RoomFactoryPrx& factory, const Ice::Current& current);
 };
 
 #endif
