@@ -1,7 +1,9 @@
+#include <csignal>
 #include "RoomI.h"
 #include "UserI.h"
 using namespace std;
 using namespace Chat;
+
 
 int main(int argc, char const* argv[]) {
     int exitStatus = EXIT_SUCCESS;
@@ -39,8 +41,7 @@ int main(int argc, char const* argv[]) {
             cout << "3 - join the room" << endl;
             cout << "4 - leave the room" << endl;
             cout << "5 - send message to the room" << endl;
-            cout << "6 - remove the room" << endl;
-            cout << "7 - exit" << endl;
+            cout << "6 - exit" << endl;
             cout << "----------Rooms------------" << endl;
             for (int i = 0; i < serverPrx->getRooms().size(); i++) {
                 std::cout << serverPrx->getRooms()[i]->getName() << std::endl;
@@ -119,6 +120,12 @@ int main(int argc, char const* argv[]) {
                     proxy->sendMessage(userPrx, message);
                     break;
                 }
+                case 6: {
+                    serverPrx->logout(userPrx);
+                    end = true;
+                    std::cout << "Bye bye..." << std::endl;
+                    break;
+                }
                 default:
                     cout << "Unknown action!!!" << endl;
                     break;
@@ -131,7 +138,6 @@ int main(int argc, char const* argv[]) {
         std::cerr << e << '\n';
         exitStatus = EXIT_FAILURE;
     }
-
     if (ice) {
         try {
             ice->destroy();
