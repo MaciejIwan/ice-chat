@@ -22,10 +22,10 @@ void LobbyI::login(const UserPrx& user, const std::string& password, const Ice::
             break;
         }
     }
-
-    loggedUsers.push_back(user);
-
-    std::cout << "User: " << user->getName() << " logged in" << std::endl;
+    if (flag) {
+        loggedUsers.push_back(user);
+        std::cout << "User: " << user->getName() << " logged in" << std::endl;
+    }
 }
 
 void LobbyI::logout(const UserPrx& user, const Ice::Current& current) {
