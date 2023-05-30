@@ -110,9 +110,7 @@ int main(int argc, char const* argv[]) {
                     cout << "Room name: ";
                     cin >> roomName;
 
-                    RoomPrx proxy = NULL;
-
-                    proxy = serverPrx->findRoom(roomName);
+                    RoomPrx proxy = serverPrx->findRoom(roomName);
 
                     cout << "Message: ";
                     cin.ignore(1024, '\n');

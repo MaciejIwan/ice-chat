@@ -14,10 +14,9 @@ void RoomI::join(const UserPrx& user, const Ice::Current& current) {
 void RoomI::sendMessage(const UserPrx& user, const std::string& message, const Ice::Current& current) {
     if (!findUser(user)) {
         throw AccessDenied();
-        std::cout << "access denied :()" << std::endl;
     }
     for (const auto& u : users) {
-        u->sendPrivateMessage(user, message);
+        user->sendPrivateMessage(u, message);
     }
 }
 
