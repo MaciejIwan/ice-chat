@@ -1,7 +1,6 @@
 #include <Ice/Ice.h>
-
+#include <fstream>
 #include <memory>
-
 #include "Chat.h"
 #include "LobbyI.h"
 
@@ -13,12 +12,26 @@ int main(int argc, char* argv[]) {
     Ice::CommunicatorPtr ic;
     try {
         ic = Ice::initialize(argc, argv);
+
+        ifstream configFile("server_config.txt");
+        string serverEndpoint;
+        if (configFile.is_open()) {
+            getline(configFile, serverEndpoint);
+            cout << serverEndpoint << endl;
+
+            configFile.close();
+        } else {
+            cerr << "Failed to open server configuration file." << endl;
+            return 1;
+        }
+
         Ice::ObjectAdapterPtr adapter =
-            ic->createObjectAdapterWithEndpoints("ChatAdapter", "default -h localhost -p 10000");
+            ic->createObjectAdapterWithEndpoints("ChatAdapter", serverEndpoint);
         auto lobby = new LobbyI();
-        
+
         adapter->add(lobby, Ice::stringToIdentity("Lobby"));
         adapter->activate();
+        cout << "server started!" << endl;
         ic->waitForShutdown();
     } catch (const Ice::Exception& ex) {
         cerr << ex << endl;

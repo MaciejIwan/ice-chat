@@ -1,4 +1,5 @@
 #include <csignal>
+#include <fstream>
 #include "RoomI.h"
 #include "UserI.h"
 using namespace std;
@@ -11,6 +12,18 @@ int main(int argc, char const* argv[]) {
 
     try {
         ice = Ice::initialize(argc, argv);
+
+        ifstream configFile("client_config.txt");
+        string serverEndpoint;
+        if (configFile.is_open()) {
+            getline(configFile, serverEndpoint);
+            cout << serverEndpoint << endl;
+            configFile.close();
+        } else {
+            cerr << "Failed to open client configuration file." << endl;
+            return 1;
+        }
+
         Ice::ObjectAdapterPtr adapter = ice->createObjectAdapterWithEndpoints("adapter2", "default");
 
         string name;
@@ -23,7 +36,7 @@ int main(int argc, char const* argv[]) {
 
         UserPrx userPrx = UserPrx::checkedCast(userPrxBase);
 
-        Ice::ObjectPrx serverPrxBase = ice->stringToProxy("Lobby:default -p 10000");
+        Ice::ObjectPrx serverPrxBase = ice->stringToProxy(serverEndpoint);
 
         LobbyPrx serverPrx = LobbyPrx::checkedCast(serverPrxBase);
         if (!serverPrx) {
