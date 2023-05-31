@@ -15,12 +15,20 @@ void RoomI::sendMessage(const UserPrx& user, const std::string& message, const I
     if (!findUser(user)) {
         throw AccessDenied();
     }
+
     for (const auto& u : users) {
-        user->sendPrivateMessage(u, message);
+        try {
+            cout << "Sending message to " << u->getName() << "message: " << message << endl;
+            u->receiveMessage(message);
+        } catch (const Ice::Exception& e) {
+            cout << "Error" << endl;
+            users.erase(findUserIterator(u));
+        }
     }
 }
 
 void RoomI::leave(const UserPrx& user, const Ice::Current& current) {
+    cout << "leave" << endl;
     auto it = findUserIterator(user);
     if (it != users.end()) {
         users.erase(it);
