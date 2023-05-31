@@ -8,7 +8,7 @@ void LobbyI::_cpp_register(const UserPrx& user, const std::string& password, con
             throw Chat::UserExists();
         }
     }
-
+    
     registeredUsers.push_back(user);
 
     std::cout << "User: " << user->getName() << " registered" << std::endl;

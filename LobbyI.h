@@ -25,7 +25,6 @@ class LobbyI : public Lobby {
     Rooms rooms;
     Users registeredUsers;
     Users loggedUsers;
-    // RoomFactoryI roomFactory = RoomFactoryI();
 };
 
 #endif
